@@ -1,0 +1,14 @@
+<app-generic-list [list]="movies">
+    <div class="movies-container" content>
+        <div *ngFor="let movie of movies" class="movie-container">
+            <img [src]="movie.poster" alt="poster">
+            <p>
+                <a>
+                    {{movie.title}}
+                </a>
+            </p>
+            <a mat-flat-button color="primay">Edit</a>
+            <button mat-flat-button color="warn">Delete</button>
+        </div>
+    </div>
+</app-generic-list>

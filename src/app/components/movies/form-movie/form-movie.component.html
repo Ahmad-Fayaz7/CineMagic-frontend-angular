@@ -1,0 +1,12 @@
+<form [formGroup]="movieForm" (ngSubmit)="saveChanges()">
+    <mat-form-field appearance="outline">
+        <mat-label for="name">Title:</mat-label>
+        <input type="text" id="title" formControlName="title" matInput />
+        <mat-error *ngIf="movieForm.invalid">{{getErrorMessageForTitle()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <input matInput id="price" formControlName="price">
+    </mat-form-field>
+    <button mat-flat-button color="primary" [disabled]="movieForm.invalid" type="submit">Save Changes</button>
+    <button mat-stroked-button type="button">Cancel</button>
+</form>

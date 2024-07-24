@@ -1,0 +1,8 @@
+<form [formGroup]="genreForm" (ngSubmit)="saveChanges()">
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" formControlName="name" matInput>
+    </mat-form-field>
+    <button mat-flat-button color="primary" [disabled]="genreForm.invalid" type="submit">Save Changes</button>
+    <button mat-stroked-button type="button">Cancel</button>
+</form>

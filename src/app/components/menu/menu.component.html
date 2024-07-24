@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+    <span>
+        <a mat-button [routerLink]="['/']">
+            <mat-icon>local_movies</mat-icon>CineMagic
+        </a>
+    </span>
+    <div>
+        <a mat-button [routerLink]="['movies/moviefilter']"><mat-icon>search</mat-icon>Filter Movies</a>
+    </div>
+    <div>
+        <a mat-button [routerLink]="['genres']">Genres</a>
+    </div>
+    <div>
+        <a mat-button [routerLink]="['actors']">Actors</a>
+    </div>
+    <div>
+        <a mat-button [routerLink]="['movietheaters']">Movie Teathers</a>
+    </div>
+    <div>
+        <a mat-button [routerLink]="['movies/create']">Create Movie</a>
+    </div>
+</mat-toolbar>

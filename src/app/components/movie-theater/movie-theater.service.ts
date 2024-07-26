@@ -17,4 +17,8 @@ export class MovieTheaterService {
   public create(movieTheaterCreationDto: movieTheaterCreationDto) {
     return this.http.post(this.apiUrl, movieTheaterCreationDto);
   }
+
+  public get(): Observable<movieTheaterDto[]> {
+    return this.http.get<movieTheaterDto[]>(this.apiUrl);
+  }
 }

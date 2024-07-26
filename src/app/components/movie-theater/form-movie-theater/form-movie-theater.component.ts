@@ -59,7 +59,6 @@ export class FormMovieTheaterComponent {
     console.log(mapCoordinates);
   }
   saveChanges() {
-    console.log(this.movieTheaterForm.value);
     this.model = this.movieTheaterForm.value;
     this.onSaveChanges.emit(this.movieTheaterForm.value);
   }

@@ -1,4 +1,4 @@
-<form (submit)="saveChanges()" [formGroup]="movieTheaterForm">
+<form (ngSubmit)="saveChanges()" [formGroup]="movieTheaterForm">
     <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name">

@@ -19,6 +19,7 @@ export class CreateMovieTheaterComponent {
   ) {}
 
   saveChanges(movieTheaterCreationDto: movieTheaterCreationDto) {
+    console.log(movieTheaterCreationDto);
     this.movieTheaterService
       .create(movieTheaterCreationDto)
       .subscribe(() => this.router.navigate(['/movietheaters']));

@@ -4,6 +4,7 @@ import { MaterialModule } from '../../../material/material.module';
 import { MovieTheaterService } from '../movie-theater.service';
 import { movieTheaterDto } from '../movie-theater.model';
 import { GenericListComponent } from '../../utils/generic-list/generic-list.component';
+import { SweetAlertService } from '../../../utilities/sweet-alert/sweet-alret.service';
 
 @Component({
   selector: 'app-index-movie-theater',
@@ -15,13 +16,33 @@ import { GenericListComponent } from '../../utils/generic-list/generic-list.comp
 export class IndexMovieTheaterComponent {
   movieTheaters: movieTheaterDto[] = [];
   columnsToDisplay = ['name', 'actions'];
-  constructor(private movieTheaterService: MovieTheaterService) {}
+  constructor(
+    private movieTheaterService: MovieTheaterService,
+    private sweetAlertService: SweetAlertService
+  ) {}
   ngOnInit() {
+    this.loadMovieTheaters();
+  }
+
+  loadMovieTheaters() {
     this.movieTheaterService.get().subscribe((data) => {
-      console.log(data);
       this.movieTheaters = data;
     });
   }
 
-  delete(id: number) {}
+  async showConfirmation(id: number) {
+    const result = await this.sweetAlertService.confirm(
+      'Are you sure?',
+      'You will not be able to recover this movie theater!'
+    );
+    if (result.isConfirmed) {
+      // Perform the action
+      console.log('Confirmed');
+      this.movieTheaterService
+        .delete(id)
+        .subscribe(() => this.loadMovieTheaters());
+    } else if (result.isDismissed) {
+      console.log('Cancelled');
+    }
+  }
 }

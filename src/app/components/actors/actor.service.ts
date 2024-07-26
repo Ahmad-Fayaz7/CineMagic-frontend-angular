@@ -12,7 +12,7 @@ export class ActorService {
   private apiUrl = environment.apiUrl + '/actors';
   constructor(private http: HttpClient) {}
 
-  getActors(page: number, recordsPerPage: number): Observable<any> {
+  get(page: number, recordsPerPage: number): Observable<any> {
     let params = new HttpParams();
     params = params.append('page', page.toString());
     params = params.append('recordsPerPage', recordsPerPage.toString());

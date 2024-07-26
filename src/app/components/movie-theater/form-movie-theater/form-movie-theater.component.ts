@@ -35,7 +35,7 @@ export class FormMovieTheaterComponent {
   model!: movieTheaterDto;
   initialcoordinates: mapCoordinates[] = [];
 
-  @Output() onSaveChanges = new EventEmitter<movieTheaterCreationDto>();
+  @Output() onSaveChanges = new EventEmitter<movieTheaterDto>();
 
   constructor(private formBuilder: FormBuilder, private router: Router) {}
   ngOnInit() {

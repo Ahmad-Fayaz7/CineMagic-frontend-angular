@@ -34,7 +34,7 @@ export class IndexActorComponent {
   }
   loadData() {
     this.actorService
-      .getActors(this.currentPage, this.pageSize)
+      .get(this.currentPage, this.pageSize)
       .subscribe((response: HttpResponse<actorDto[]>) => {
         if (response.body) {
           this.actors = response.body;

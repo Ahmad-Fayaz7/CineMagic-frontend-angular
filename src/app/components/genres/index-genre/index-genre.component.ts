@@ -25,9 +25,6 @@ export class IndexGenreComponent {
   ngOnInit() {
     this.loadGenres();
   }
-  delete(id: number) {
-    this.genresService.delete(id).subscribe(() => this.loadGenres());
-  }
 
   loadGenres() {
     this.genresService.getGenres().subscribe((data) => {

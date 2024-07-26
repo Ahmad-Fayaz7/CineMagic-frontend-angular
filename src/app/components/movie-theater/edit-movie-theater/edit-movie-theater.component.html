@@ -1,2 +1,4 @@
 <h4>Edit Movie Theater</h4>
-<app-form-movie-theater [model]="model"></app-form-movie-theater>
+<app-form-movie-theater *ngIf="model" [model]="model" (onSaveChanges)="saveChanges($event)"></app-form-movie-theater>
+
+<mat-spinner *ngIf="!model"></mat-spinner>

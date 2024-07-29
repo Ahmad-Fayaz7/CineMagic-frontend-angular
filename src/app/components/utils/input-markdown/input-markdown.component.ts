@@ -16,5 +16,5 @@ import { MarkdownModule } from 'ngx-markdown';
 export class InputMarkdownComponent {
   @Output()
   changeMarkdown: EventEmitter<string> = new EventEmitter<string>();
-  @Input() markdownContent = '';
+  @Input() markdownContent: any = '';
 }

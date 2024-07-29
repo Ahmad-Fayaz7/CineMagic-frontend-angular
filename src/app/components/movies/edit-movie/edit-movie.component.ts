@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormMovieComponent } from '../form-movie/form-movie.component';
 import { ActivatedRoute } from '@angular/router';
+import { movieDto } from '../movie.model';
 
 @Component({
   selector: 'app-edit-movie',
@@ -11,9 +12,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditMovieComponent {
   constructor(private activatedRout: ActivatedRoute) {}
+  model: movieDto = {
+    title: 'titanic',
+    poster:
+      'https://m.media-amazon.com/images/I/811lT7khIrL._AC_UF894,1000_QL80_.jpg',
+    releaseDate: new Date(),
+    inTheater: false,
+    summary: '',
+    trailer: '',
+  };
   ngOnInit(): void {
-    this.activatedRout.params.subscribe((params) => {
-      alert(params['id']);
-    });
+    this.activatedRout.params.subscribe((params) => {});
   }
 }

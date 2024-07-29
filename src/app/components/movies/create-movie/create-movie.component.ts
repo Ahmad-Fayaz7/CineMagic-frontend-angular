@@ -12,7 +12,9 @@ import { movieCreationDto } from '../movie.model';
   styleUrl: './create-movie.component.css',
 })
 export class CreateMovieComponent {
+  model!: movieCreationDto;
   handleSentMovie(movie: movieCreationDto) {
+    this.model = movie;
     console.log(movie);
   }
 }

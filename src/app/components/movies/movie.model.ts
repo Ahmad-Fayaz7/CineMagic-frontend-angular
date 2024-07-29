@@ -1,6 +1,19 @@
 export interface movieCreationDto {
   title: string;
-  poster: string;
+  poster: File;
+  inTheater: boolean;
+  summary: string;
   releaseDate: Date;
-  price: number;
+  trailer: string;
+  genreIds: number[];
+  movieTheaterIds: number[];
+}
+
+export interface movieDto {
+  title: string;
+  poster: string;
+  inTheater: boolean;
+  summary: string;
+  releaseDate: Date;
+  trailer: string;
 }

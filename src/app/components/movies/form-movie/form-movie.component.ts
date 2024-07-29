@@ -13,6 +13,7 @@ import { InputImageComponent } from '../../utils/input-image/input-image.compone
 import { InputMarkdownComponent } from '../../utils/input-markdown/input-markdown.component';
 import { MultipleSelectorComponent } from '../../utils/multiple-selector/multiple-selector.component';
 import { multipleSelectorModel } from '../../utils/multiple-selector/multiple-selector.model';
+import { ActorAutocompleteComponent } from '../../actors/actor-autocomplete/actor-autocomplete.component';
 
 @Component({
   selector: 'app-form-movie',
@@ -25,6 +26,7 @@ import { multipleSelectorModel } from '../../utils/multiple-selector/multiple-se
     InputImageComponent,
     InputMarkdownComponent,
     MultipleSelectorComponent,
+    ActorAutocompleteComponent,
   ],
   templateUrl: './form-movie.component.html',
   styleUrl: './form-movie.component.css',

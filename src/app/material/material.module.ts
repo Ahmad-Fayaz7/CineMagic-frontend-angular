@@ -15,6 +15,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
   providers: [provideNativeDateAdapter()],
   imports: [
@@ -36,6 +38,8 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     MatSortModule,
     MatProgressSpinner,
     MatPaginatorModule,
+    MatAutocompleteModule,
+    DragDropModule,
   ],
   exports: [
     MatButtonModule,
@@ -56,6 +60,8 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     MatSortModule,
     MatProgressSpinner,
     MatPaginatorModule,
+    MatAutocompleteModule,
+    DragDropModule,
   ],
 })
 export class MaterialModule {}

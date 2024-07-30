@@ -1,3 +1,6 @@
+import { genreDto } from '../genres/genre.model';
+import { movieTheaterDto } from '../movie-theater/movie-theater.model';
+
 export interface movieCreationDto {
   title: string;
   poster: File;
@@ -16,4 +19,9 @@ export interface movieDto {
   summary: string;
   releaseDate: Date;
   trailer: string;
+}
+
+export interface movieGetPostDto {
+  genres: genreDto[];
+  movieTheaters: movieTheaterDto[];
 }

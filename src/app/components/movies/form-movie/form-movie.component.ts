@@ -32,18 +32,12 @@ import { ActorAutocompleteComponent } from '../../actors/actor-autocomplete/acto
   styleUrl: './form-movie.component.css',
 })
 export class FormMovieComponent {
-  nonSelectedGenres: multipleSelectorModel[] = [
-    { key: 1, value: 'Comedy' },
-    { key: 2, value: 'Action' },
-    { key: 3, value: 'Drama' },
-  ];
-  selectedGenres: multipleSelectorModel[] = [];
+  @Input()
+  nonSelectedGenres: multipleSelectorModel[] = [];
 
-  nonSelectedMovieTheaters: multipleSelectorModel[] = [
-    { key: 1, value: 'Yelmo Cines Ideal' },
-    { key: 2, value: 'Kinépolis movie city' },
-    { key: 3, value: 'Cinesa Proyecciones' },
-  ];
+  selectedGenres: multipleSelectorModel[] = [];
+  @Input()
+  nonSelectedMovieTheaters: multipleSelectorModel[] = [];
 
   selectedMovieTheaters: multipleSelectorModel[] = [];
   onImageSelected(image: File) {

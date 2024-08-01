@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { actorCreationDto, actorDto, movieActorDto } from './actor.model';
 import { environment } from '../../environments/environment';
 import { formatDateFormData } from '../utils/utility-functions';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,9 +26,9 @@ export class ActorService {
     return this.http.get<actorDto>(`${this.apiUrl}/${id}`);
   }
   SearchByName(name: string): Observable<movieActorDto[]> {
-    const headers = new HttpHeaders('Content-Type: application/json');
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<movieActorDto[]>(
-      `${this.apiUrl}/searchByName`,
+      `${this.apiUrl}/SearchByName`,
       JSON.stringify(name),
       { headers }
     );

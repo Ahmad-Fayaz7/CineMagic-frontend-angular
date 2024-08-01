@@ -13,6 +13,7 @@ import { MaterialModule } from '../../../material/material.module';
 export class InputImageComponent {
   imageBase64: any;
   @Input() urlCurrentImage: any;
+  @Input() imageWidth: string = '250px';
   @Output() onImageSelected: EventEmitter<File> = new EventEmitter<File>();
   change(event: any) {
     if (event.target.files.length > 0) {

@@ -17,15 +17,18 @@ import { movieActorDto } from '../actor.model';
 })
 export class ActorAutocompleteComponent {
   control: FormControl = new FormControl();
+  @Input()
   selectedActors: movieActorDto[] = [];
-  @Input() actorsToDisplay: movieActorDto[] = [];
+
+  actorsToDisplay: movieActorDto[] = [];
   columnsToDisplay = ['picture', 'name', 'character', 'actions'];
 
   constructor(private actorService: ActorService) {}
 
   @ViewChild(MatTable) table!: MatTable<any>;
-  ngOnInit() {
+  ngOnInit(): void {
     this.control.valueChanges.subscribe((value) => {
+      console.log(value);
       this.actorService.SearchByName(value).subscribe((actors) => {
         this.actorsToDisplay = actors;
       });
@@ -33,12 +36,12 @@ export class ActorAutocompleteComponent {
   }
 
   optionSelected(selectedOption: MatAutocompleteSelectedEvent) {
-    console.log(selectedOption.option.value);
     this.control.patchValue('');
+    console.log(selectedOption.option.value);
 
     if (
       this.selectedActors.findIndex(
-        (x) => x.id == selectedOption.option.value.id
+        (x) => x.id === selectedOption.option.value.id
       ) !== -1
     ) {
       return;

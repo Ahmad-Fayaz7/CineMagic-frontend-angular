@@ -17,4 +17,9 @@ export class InputMarkdownComponent {
   @Output()
   changeMarkdown: EventEmitter<string> = new EventEmitter<string>();
   @Input() markdownContent: any = '';
+  @Input() label = 'Label';
+
+  onChange(content: string) {
+    this.changeMarkdown.emit(content);
+  }
 }

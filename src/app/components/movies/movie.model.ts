@@ -1,15 +1,17 @@
+import { movieActorDto } from '../actors/actor.model';
 import { genreDto } from '../genres/genre.model';
 import { movieTheaterDto } from '../movie-theater/movie-theater.model';
 
 export interface movieCreationDto {
   title: string;
   poster: File;
-  inTheater: boolean;
+  inTheaters: boolean;
   summary: string;
   releaseDate: Date;
   trailer: string;
-  genreIds: number[];
-  movieTheaterIds: number[];
+  genresIds: number[];
+  movieTheatersIds: number[];
+  actors: movieActorDto[];
 }
 
 export interface movieDto {

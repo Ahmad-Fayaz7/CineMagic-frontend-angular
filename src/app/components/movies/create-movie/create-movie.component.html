@@ -1,5 +1,5 @@
 <h2>Create Movie</h2>
-<app-form-movie (dataEmitter)="handleSentMovie($event)" [nonSelectedGenres]="nonSelectedGenres"
+<app-form-movie (dataEmitter)="saveChanges($event)" [nonSelectedGenres]="nonSelectedGenres"
     [nonSelectedMovieTheaters]="nonSelectedMovieTheaters" *ngIf="nonSelectedGenres"></app-form-movie>
 
 <mat-spinner *ngIf="!nonSelectedGenres"></mat-spinner>

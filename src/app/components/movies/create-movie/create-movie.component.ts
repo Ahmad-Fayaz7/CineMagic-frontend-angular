@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MaterialModule } from '../../../material/material.module';
 import { FormMovieComponent } from '../form-movie/form-movie.component';
 import { movieCreationDto } from '../movie.model';
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CreateMovieComponent {
   model!: movieCreationDto;
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, private router: Router) {}
   nonSelectedGenres: multipleSelectorModel[] = [];
   nonSelectedMovieTheaters: multipleSelectorModel[] = [];
   ngOnInit() {
@@ -33,8 +33,10 @@ export class CreateMovieComponent {
       });
     });
   }
-  handleSentMovie(movie: movieCreationDto) {
+  saveChanges(movie: movieCreationDto) {
     this.model = movie;
     console.log(movie);
+    this.movieService.create(movie).subscribe();
+    this.router.navigate(['']);
   }
 }

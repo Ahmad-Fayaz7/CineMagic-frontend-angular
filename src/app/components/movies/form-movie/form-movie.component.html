@@ -1,6 +1,7 @@
 <form [formGroup]="movieForm" (ngSubmit)="saveChanges()">
     <h4>Select the poster</h4>
-    <app-input-image [urlCurrentImage]="model?.poster" (onImageSelected)="onImageSelected($event)"></app-input-image>
+    <app-input-image [urlCurrentImage]="model?.poster" (onImageSelected)="onImageSelected($event)"
+        [imageWidth]="'250px'"></app-input-image>
 
     <div>
         <mat-checkbox formControlName="inTheaters">In Theaters</mat-checkbox>
@@ -18,7 +19,8 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <h4>Summary</h4>
-    <app-input-markdown [markdownContent]="model?.title"></app-input-markdown>
+    <app-input-markdown [markdownContent]="model?.summary" [label]="'Summary'"
+        (changeMarkdown)="onMarkdownChange($event)"></app-input-markdown>
     <mat-form-field appearance="outline">
         <mat-label for="name">Title:</mat-label>
         <input type="text" id="title" formControlName="title" matInput />
@@ -35,8 +37,9 @@
     <app-multiple-selector [nonSelectedItems]="nonSelectedMovieTheaters"
         [selectedItems]="selectedMovieTheaters"></app-multiple-selector>
 
+    <!-- Select Movie Actors -->
     <h4>Movie Actors</h4>
-    <app-actor-autocomplete></app-actor-autocomplete>
+    <app-actor-autocomplete [selectedActors]="selectedActors"></app-actor-autocomplete>
     <button mat-flat-button color="primary" [disabled]="movieForm.invalid" type="submit">Save Changes</button>
     <button mat-stroked-button type="button">Cancel</button>
 </form>

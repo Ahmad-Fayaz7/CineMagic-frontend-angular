@@ -20,6 +20,9 @@ export class EditMovieComponent {
     inTheater: false,
     summary: '',
     trailer: '',
+    genres: [],
+    movieTheaters: [],
+    actors: [],
   };
   ngOnInit(): void {
     this.activatedRout.params.subscribe((params) => {});

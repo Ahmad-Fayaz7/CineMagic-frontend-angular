@@ -13,6 +13,7 @@ import { EditMovieComponent } from './components/movies/edit-movie/edit-movie.co
 import { EditActorComponent } from './components/actors/edit-actor/edit-actor.component';
 import { EditGenreComponent } from './components/genres/edit-genre/edit-genre.component';
 import { EditMovieTheaterComponent } from './components/movie-theater/edit-movie-theater/edit-movie-theater.component';
+import { MovieDetailsComponent } from './components/movies/movie-details/movie-details.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
   {
     path: 'movies/moviefilter',
     component: FilterMovieComponent,
+  },
+  {
+    path: 'movies/:id',
+    component: MovieDetailsComponent,
   },
   {
     path: 'genres',

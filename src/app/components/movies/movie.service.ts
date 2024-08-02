@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {
   homeDto,
   movieCreationDto,
   movieDto,
   movieGetPostDto,
+  MoviePutGetDto,
 } from './movie.model';
 import { formatDateFormData } from '../utils/utility-functions';
 
@@ -26,6 +27,17 @@ export class MovieService {
   // Get a movie by Id
   getById(id: number): Observable<movieDto> {
     return this.http.get<movieDto>(`${this.apiUrl}/${id}`);
+  }
+
+  // Get a movie object for movie edit page
+  getPut(id: number): Observable<MoviePutGetDto> {
+    return this.http.get<MoviePutGetDto>(`${this.apiUrl}/putget/${id}`);
+  }
+
+  // Edit a movie
+  edit(id: number, movieCreationDto: movieCreationDto) {
+    const formdata = this.buildFormData(movieCreationDto);
+    return this.http.put(`${this.apiUrl}/edit/${id}`, formdata);
   }
 
   // Get movies for landing page

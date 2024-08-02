@@ -35,3 +35,12 @@ export interface homeDto {
   inTheaters: movieDto[];
   upcomingReleases: movieDto[];
 }
+
+export interface MoviePutGetDto {
+  movie: movieDto;
+  selectedGenres: genreDto[];
+  nonSelectedGenres: genreDto[];
+  selectedMovieTheaters: movieTheaterDto[];
+  nonSelectedMovieTheaters: movieTheaterDto[];
+  actors: movieActorDto[];
+}

@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { movieCreationDto, movieDto, movieGetPostDto } from './movie.model';
+import {
+  homeDto,
+  movieCreationDto,
+  movieDto,
+  movieGetPostDto,
+} from './movie.model';
 import { formatDateFormData } from '../utils/utility-functions';
 
 @Injectable({
@@ -21,6 +26,11 @@ export class MovieService {
   // Get a movie by Id
   getById(id: number): Observable<movieDto> {
     return this.http.get<movieDto>(`${this.apiUrl}/${id}`);
+  }
+
+  // Get movies for landing page
+  getHomePageMovies(): Observable<homeDto> {
+    return this.http.get<homeDto>(this.apiUrl);
   }
 
   // Creates a movie

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import { latLng, LeafletMouseEvent, marker, Marker, tileLayer } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { mapCoordinates } from './coordinate';
+import { mapCoordinates, mapCoordinatesWithMessage } from './coordinate';
 @Component({
   selector: 'app-map',
   standalone: true,
@@ -13,7 +13,8 @@ import { mapCoordinates } from './coordinate';
 export class MapComponent {
   constructor() {}
 
-  @Input() initialCoordinates: mapCoordinates[] = [];
+  @Input() initialCoordinates: mapCoordinatesWithMessage[] = [];
+  @Input() editMode: boolean = true;
   @Output() onSelectedLocation = new EventEmitter<mapCoordinates>();
   options = {
     layers: [
@@ -29,17 +30,23 @@ export class MapComponent {
   layers: Marker<any>[] = [];
 
   ngOnInit(): void {
-    this.layers = this.initialCoordinates.map((value) =>
-      marker([value.latitude, value.longitude])
-    );
+    this.layers = this.initialCoordinates.map((value) => {
+      const m = marker([value.latitude, value.longitude]);
+      if (value.message) {
+        m.bindPopup(value.message, { autoClose: false, autoPan: false });
+      }
+      return m;
+    });
   }
 
   handleMapClick(event: LeafletMouseEvent) {
-    const latitude = event.latlng.lat;
-    const longitude = event.latlng.lng;
-    console.log({ latitude, longitude });
-    this.layers = [];
-    this.layers.push(marker([latitude, longitude]));
-    this.onSelectedLocation.emit({ latitude, longitude });
+    if (this.editMode) {
+      const latitude = event.latlng.lat;
+      const longitude = event.latlng.lng;
+      console.log({ latitude, longitude });
+      this.layers = [];
+      this.layers.push(marker([latitude, longitude]));
+      this.onSelectedLocation.emit({ latitude, longitude });
+    }
   }
 }

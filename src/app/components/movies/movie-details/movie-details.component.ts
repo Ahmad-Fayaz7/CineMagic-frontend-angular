@@ -7,11 +7,18 @@ import { mapCoordinatesWithMessage } from '../../utils/map/coordinate';
 import { MaterialModule } from '../../../material/material.module';
 import { CommonModule } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
+import { MapComponent } from '../../utils/map/map.component';
 
 @Component({
   selector: 'app-movie-details',
   standalone: true,
-  imports: [MaterialModule, CommonModule, RouterLink, MarkdownComponent],
+  imports: [
+    MaterialModule,
+    CommonModule,
+    RouterLink,
+    MarkdownComponent,
+    MapComponent,
+  ],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css',
 })
@@ -51,7 +58,7 @@ export class MovieDetailsComponent {
     }
     let videoId = url.split('v=')[1];
     const ampersandPosition = videoId.indexOf('&');
-    if (ampersandPosition == -1) {
+    if (ampersandPosition !== -1) {
       videoId = videoId.substring(0, ampersandPosition);
     }
     return this.sanitizer.bypassSecurityTrustResourceUrl(

@@ -11,6 +11,7 @@ export interface actorDto {
   dateOfBirth: Date;
   picture: string;
   biography: string;
+  character: string;
 }
 
 export interface movieActorDto {

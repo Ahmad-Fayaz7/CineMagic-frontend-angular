@@ -30,3 +30,8 @@ export interface movieGetPostDto {
   genres: genreDto[];
   movieTheaters: movieTheaterDto[];
 }
+
+export interface homeDto {
+  inTheaters: movieDto[];
+  upcomingReleases: movieDto[];
+}

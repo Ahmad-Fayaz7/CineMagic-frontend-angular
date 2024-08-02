@@ -9,7 +9,10 @@ import {
 import { MaterialModule } from '../../../material/material.module';
 import { Router, RouterLink } from '@angular/router';
 import { MapComponent } from '../../utils/map/map.component';
-import { mapCoordinates } from '../../utils/map/coordinate';
+import {
+  mapCoordinates,
+  mapCoordinatesWithMessage,
+} from '../../utils/map/coordinate';
 import {
   movieTheaterCreationDto,
   movieTheaterDto,
@@ -33,7 +36,7 @@ export class FormMovieTheaterComponent {
   movieTheaterForm!: FormGroup;
   @Input()
   model!: movieTheaterDto;
-  initialcoordinates: mapCoordinates[] = [];
+  initialcoordinates: mapCoordinatesWithMessage[] = [];
 
   @Output() onSaveChanges = new EventEmitter<movieTheaterDto>();
 
@@ -50,6 +53,7 @@ export class FormMovieTheaterComponent {
       this.initialcoordinates.push({
         latitude: this.model.latitude,
         longitude: this.model.longitude,
+        message: 'location',
       });
     }
   }

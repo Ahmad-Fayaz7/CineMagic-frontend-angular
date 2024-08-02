@@ -15,6 +15,7 @@
                 <iframe width="560" height="315" [src]="trailerUrl" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
+
             </div>
         </div>
 
@@ -32,11 +33,14 @@
                     <img [src]="actor.picture" alt="" style="width: 50px; vertical-align: middle;" />
                     <span style="display: inline-block; width: 200px; margin-left: 1em;">{{actor.name}}</span>
                     <span style="display: inline-block; width: 45px;">...</span>
-
+                    <span>{{actor.character}}</span>
                 </div>
             </div>
-
         </div>
+    </div>
+    <div style="padding-left: 1em; width: 100%; display: block;" *ngIf="coordinates.length > 0">
+        <h2>Displaying in the following movie theaters</h2>
+        <app-map [initialCoordinates]="coordinates" [editMode]="false"></app-map>
     </div>
 </div>
 

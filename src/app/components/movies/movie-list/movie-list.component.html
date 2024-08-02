@@ -1,13 +1,13 @@
 <app-generic-list [list]="movies">
     <div class="movies-container" content>
         <div *ngFor="let movie of movies" class="movie-container">
-            <img [src]="movie.poster" alt="poster">
+            <a [routerLink]="'movies/' + movie.id"> <img [src]="movie.poster" alt="poster"> </a>
             <p>
-                <a>
+                <a [routerLink]="'movies/' + movie.id">
                     {{movie.title}}
                 </a>
             </p>
-            <a mat-flat-button color="primay">Edit</a>
+            <a mat-flat-button color="primay" [routerLink]="'movies/edit/' + movie.id">Edit</a>
             <button mat-flat-button color="warn">Delete</button>
         </div>
     </div>

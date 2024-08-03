@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -37,7 +37,17 @@ export class MovieService {
   // Edit a movie
   edit(id: number, movieCreationDto: movieCreationDto) {
     const formdata = this.buildFormData(movieCreationDto);
-    return this.http.put(`${this.apiUrl}/edit/${id}`, formdata);
+    return this.http.put(`${this.apiUrl}/${id}`, formdata);
+  }
+
+  // Filter movies
+  filter(values: any): Observable<any> {
+    const params = new HttpParams({ fromObject: values });
+    // observe: 'respnse' makes the httpClient to return full HttpResponse<T> object instead of just the response body of type T.
+    return this.http.get<movieDto[]>(`${this.apiUrl}/filter`, {
+      params,
+      observe: 'response', // becuase we the info in header for pagination
+    });
   }
 
   // Get movies for landing page
@@ -46,9 +56,9 @@ export class MovieService {
   }
 
   // Creates a movie
-  public create(movieCreationDto: movieCreationDto) {
+  public create(movieCreationDto: movieCreationDto): Observable<number> {
     const formData = this.buildFormData(movieCreationDto);
-    return this.http.post(this.apiUrl, formData);
+    return this.http.post<number>(this.apiUrl, formData);
   }
 
   // Prepares the from data

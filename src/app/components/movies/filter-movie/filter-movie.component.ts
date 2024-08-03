@@ -1,10 +1,22 @@
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MaterialModule } from '../../../material/material.module';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Action } from 'rxjs/internal/scheduler/Action';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { MovieListComponent } from '../movie-list/movie-list.component';
+import { MovieService } from '../movie.service';
+import { genreDto } from '../../genres/genre.model';
+import { movieDto } from '../movie.model';
+import { HttpResponse } from '@angular/common/http';
+import { GenresService } from '../../genres/genres.service';
+import { GenericListComponent } from '../../utils/generic-list/generic-list.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-filter-movie',
@@ -15,72 +27,136 @@ import { MovieListComponent } from '../movie-list/movie-list.component';
     RouterLink,
     CommonModule,
     MovieListComponent,
+    GenericListComponent,
   ],
   templateUrl: './filter-movie.component.html',
   styleUrl: './filter-movie.component.css',
 })
 export class FilterMovieComponent {
-  movieFilterForm;
-  genres = [
-    { id: 1, name: 'Drama' },
-    { id: 2, name: 'Action' },
-    { id: 3, name: 'Comedy' },
-  ];
-  movies = [
-    {
-      title: 'Spider-man',
-      poster:
-        'https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png',
-      price: 14,
-    },
-    {
-      title: 'Moana',
-      poster:
-        'https://m.media-amazon.com/images/I/71RgCh-pLWL._AC_UF894,1000_QL80_.jpg',
-      price: 14,
-    },
-    {
-      title: 'Shrek',
-      poster:
-        'https://e00-elmundo.uecdn.es/television/programacion-tv/img/v2/programas/87/504967.png',
-      price: 14,
-    },
-    {
-      title: 'Titanic',
-      poster:
-        'https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg',
-      price: 14,
-    },
-    {
-      title: 'Incepiton',
-      poster:
-        'https://m.media-amazon.com/images/I/912AErFSBHL._AC_UF894,1000_QL80_.jpg',
-      price: 14,
-    },
-  ];
+  movieFilterForm!: FormGroup;
+  genres!: genreDto[];
+  movies!: movieDto[];
+  filterFormInitialValues: any;
+  currentPage = 1;
+  recordsPerPage = 10;
+  totalAmountOfRecords: any;
+  constructor(
+    private formBuilder: FormBuilder,
+    private movieService: MovieService,
+    private genreService: GenresService,
+    private location: Location,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
-  originalMovies = this.movies;
-  filterMovies(values: any) {
-    if (values.title) {
-      this.movies = this.movies.filter(
-        (movie) => movie.title.indexOf(values.title) !== -1
-      );
-    }
-  }
-
-  clearForm() {
-    this.movieFilterForm.reset();
-  }
-  constructor(private formBuilder: FormBuilder) {
+  ngOnInit() {
     this.movieFilterForm = this.formBuilder.group({
       title: ['', Validators.required],
       genreId: 0,
       upcomingReleases: false,
       inTheaters: false,
     });
-    this.movieFilterForm.valueChanges.subscribe((values) => {
-      this.movies = this.originalMovies;
-      this.filterMovies(values);
+    this.filterFormInitialValues = this.movieFilterForm.value;
+    this.readParamsFromUrl();
+    this.genreService.getGenres().subscribe((data) => {
+      this.genres = data;
+
+      this.filterMovies(this.movieFilterForm.value);
+
+      this.movieFilterForm.valueChanges.subscribe((values) => {
+        this.filterMovies(values);
+        this.writeParametersInUrl();
+      });
     });
+  }
+
+  filterMovies(values: any) {
+    values.page = this.currentPage;
+    values.recordsPerPage = this.recordsPerPage;
+    this.movieService
+      .filter(values)
+      .subscribe((response: HttpResponse<movieDto[]>) => {
+        if (response.body !== null) {
+          this.movies = response.body;
+        }
+
+        this.totalAmountOfRecords = response.headers.get(
+          'totalAmountOfRecords'
+        );
+      });
+  }
+
+  paginatorUpdate(event: PageEvent) {
+    this.currentPage = event.pageIndex + 1;
+    this.recordsPerPage = event.pageSize;
+    this.filterMovies(this.movieFilterForm.value);
+    this.writeParametersInUrl();
+  }
+
+  readParamsFromUrl() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      var obj: any = {};
+
+      if (params['title']) {
+        obj.title = params['title'];
+      }
+
+      if (params['genreId']) {
+        obj.genreId = params['genreId'];
+      }
+
+      if (params['upcomingReleases']) {
+        obj.upcomingReleases = params['upcomingReleases'];
+      }
+
+      if (params['inTheates']) {
+        obj.inTheaters = params['inTheaters'];
+      }
+
+      if (params['currentPage']) {
+        this.currentPage = params['currentPage'];
+      }
+
+      if (params['recordsPerPage']) {
+        this.recordsPerPage = params['recordsPerPage'];
+      }
+      this.movieFilterForm.patchValue(obj);
+    });
+  }
+
+  writeParametersInUrl() {
+    const queryString = [];
+
+    const formValues = this.movieFilterForm.value;
+
+    if (formValues.title) {
+      queryString.push(`title=${formValues.title}`);
+    }
+
+    if (formValues.genreId) {
+      queryString.push(`genreId=${formValues.genreId}`);
+    }
+
+    if (formValues.upcomingReleases) {
+      queryString.push(`upcomingReleases=${formValues.upcomingReleases}`);
+    }
+
+    if (formValues.inTheaters) {
+      queryString.push(`inTheaters=${formValues.inTheaters}`);
+    }
+
+    if (this.currentPage) {
+      queryString.push(`currentPage=${this.currentPage}`);
+    }
+
+    if (this.recordsPerPage) {
+      queryString.push(`recordsPerPage=${this.recordsPerPage}`);
+    }
+
+    // Correctly update the URL with query parameters
+    this.location.replaceState('movies/filter', queryString.join('&'));
+  }
+
+  clearForm() {
+    this.movieFilterForm.patchValue(this.filterFormInitialValues);
   }
 }

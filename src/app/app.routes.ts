@@ -38,7 +38,7 @@ export const routes: Routes = [
     component: EditMovieComponent,
   },
   {
-    path: 'movies/moviefilter',
+    path: 'movies/filter',
     component: FilterMovieComponent,
   },
   {

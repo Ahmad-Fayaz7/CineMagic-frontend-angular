@@ -7,7 +7,7 @@
     <mat-form-field appearance="outline">
         <mat-label>Gener</mat-label>
         <select matNativeControl formControlName="genreId">
-            <option *ngFor="let genre of genres" vlaue="genre.id">{{genre.name}}</option>
+            <option *ngFor="let genre of genres" value="{{genre.id}}">{{genre.name}}</option>
         </select>
     </mat-form-field>
     <div>
@@ -15,4 +15,9 @@
         <mat-checkbox formControlName="inTheaters">In Theaters</mat-checkbox>
     </div>
     <button mat-flat-button color="warn" (click)="clearForm()">Clear Form</button>
+
 </form>
+<app-movie-list [movies]="movies"></app-movie-list>
+
+<mat-paginator [length]="totalAmountOfRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="[5, 10, 15, 20]"
+    (page)="paginatorUpdate($event)"></mat-paginator>

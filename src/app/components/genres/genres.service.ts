@@ -13,8 +13,8 @@ export class GenresService {
   private apiUrl = environment.apiUrl + '/genres';
   constructor(private http: HttpClient) {}
 
-  getGenres(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  getGenres(): Observable<genreDto[]> {
+    return this.http.get<genreDto[]>(this.apiUrl);
   }
   create(genre: genreCreationDto) {
     return this.http.post(this.apiUrl, genre);

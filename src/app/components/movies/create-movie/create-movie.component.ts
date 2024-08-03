@@ -36,7 +36,8 @@ export class CreateMovieComponent {
   saveChanges(movie: movieCreationDto) {
     this.model = movie;
     console.log(movie);
-    this.movieService.create(movie).subscribe();
-    this.router.navigate(['']);
+    this.movieService.create(movie).subscribe((id) => {
+      this.router.navigate(['/movies/' + id]);
+    });
   }
 }

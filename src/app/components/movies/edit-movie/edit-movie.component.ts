@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormMovieComponent } from '../form-movie/form-movie.component';
-import { ActivatedRoute } from '@angular/router';
-import { movieDto } from '../movie.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { movieCreationDto, movieDto } from '../movie.model';
 import { MovieService } from '../movie.service';
 import { multipleSelectorModel } from '../../utils/multiple-selector/multiple-selector.model';
 import { movieActorDto } from '../../actors/actor.model';
@@ -18,7 +18,8 @@ import { CommonModule } from '@angular/common';
 export class EditMovieComponent {
   constructor(
     private activatedRout: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private router: Router
   ) {}
 
   selectedGenres: multipleSelectorModel[] = [];
@@ -27,22 +28,13 @@ export class EditMovieComponent {
   nonSelectedMovieTheaters: multipleSelectorModel[] = [];
   selectedActors: movieActorDto[] = [];
 
-  model: movieDto = {
-    title: 'titanic',
-    poster:
-      'https://m.media-amazon.com/images/I/811lT7khIrL._AC_UF894,1000_QL80_.jpg',
-    releaseDate: new Date(),
-    inTheater: false,
-    summary: '',
-    trailer: '',
-    genres: [],
-    movieTheaters: [],
-    actors: [],
-  };
+  model!: movieDto;
 
   ngOnInit(): void {
     this.activatedRout.params.subscribe((params) => {
       this.movieService.getPut(params['id']).subscribe((response) => {
+        this.model = response.movie;
+        console.log(response);
         this.nonSelectedGenres = response.nonSelectedGenres.map((genre) => {
           return <multipleSelectorModel>{ key: genre.id, value: genre.name };
         });
@@ -68,7 +60,15 @@ export class EditMovieComponent {
             };
           }
         );
+
+        this.selectedActors = response.actors;
       });
+    });
+  }
+
+  saveChanges(movieCreationDto: movieCreationDto) {
+    this.movieService.edit(this.model.id, movieCreationDto).subscribe(() => {
+      this.router.navigate(['/movies/' + this.model.id]);
     });
   }
 }

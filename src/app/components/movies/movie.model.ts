@@ -15,15 +15,16 @@ export interface movieCreationDto {
 }
 
 export interface movieDto {
+  id: number;
   title: string;
   poster: string;
-  inTheater: boolean;
+  inTheaters: boolean;
   summary: string;
   releaseDate: Date;
   trailer: string;
   genres: genreDto[];
   movieTheaters: movieTheaterDto[];
-  actors: actorDto[];
+  actors: movieActorDto[];
 }
 
 export interface movieGetPostDto {

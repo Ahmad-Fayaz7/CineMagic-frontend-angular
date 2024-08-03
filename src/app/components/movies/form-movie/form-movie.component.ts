@@ -45,16 +45,17 @@ export class FormMovieComponent {
   @Input()
   selectedActors: movieActorDto[] = [];
 
-  movieForm: FormGroup;
+  movieForm!: FormGroup;
 
   // In Edit receives movieDto
   @Input() model!: movieDto;
 
   // In Creation sends movieCreationDto
-  @Output() dataEmitter: EventEmitter<movieCreationDto> =
+  @Output() onSaveChanges: EventEmitter<movieCreationDto> =
     new EventEmitter<movieCreationDto>();
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  ngOnInit() {
     // Creates the form and its elements
     this.movieForm = this.formBuilder.group({
       title: ['', [Validators.required]],
@@ -93,7 +94,7 @@ export class FormMovieComponent {
     this.movieForm.get('genresIds')?.setValue(genresIds);
     this.movieForm.get('movieTheatersIds')?.setValue(movieTheatersIds);
     this.movieForm.get('summary')?.setValue(this.summary);
-    this.dataEmitter.emit(this.movieForm.value);
+    this.onSaveChanges.emit(this.movieForm.value);
   }
 
   // Returns the error message for movie's title

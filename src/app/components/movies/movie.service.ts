@@ -40,6 +40,11 @@ export class MovieService {
     return this.http.put(`${this.apiUrl}/${id}`, formdata);
   }
 
+  // Delete a movie
+  delete(id: number) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
   // Filter movies
   filter(values: any): Observable<any> {
     const params = new HttpParams({ fromObject: values });

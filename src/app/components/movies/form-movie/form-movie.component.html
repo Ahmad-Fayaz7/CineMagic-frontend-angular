@@ -41,5 +41,5 @@
     <h4>Movie Actors</h4>
     <app-actor-autocomplete [selectedActors]="selectedActors"></app-actor-autocomplete>
     <button mat-flat-button color="primary" [disabled]="movieForm.invalid" type="submit">Save Changes</button>
-    <button mat-stroked-button type="button">Cancel</button>
+    <button mat-stroked-button type="button" [routerLink]="['']">Cancel</button>
 </form>

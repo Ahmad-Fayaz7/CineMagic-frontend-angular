@@ -1,5 +1,5 @@
 <h1>Movies In Theater</h1>
-<app-movie-list [movies]="moviesInTheater"></app-movie-list>
+<app-movie-list [movies]="moviesInTheater" (onDelete)="onDelete()"></app-movie-list>
 
 <h1>Upcoming Releases</h1>
-<app-movie-list [movies]="upcomingMovies"></app-movie-list>
+<app-movie-list [movies]="upcomingMovies" (onDelete)="onDelete()"></app-movie-list>

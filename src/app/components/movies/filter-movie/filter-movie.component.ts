@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { MaterialModule } from '../../../material/material.module';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import { CommonModule, Location } from '@angular/common';
 import { MovieListComponent } from '../movie-list/movie-list.component';
 import { MovieService } from '../movie.service';
@@ -154,6 +153,11 @@ export class FilterMovieComponent {
 
     // Correctly update the URL with query parameters
     this.location.replaceState('movies/filter', queryString.join('&'));
+  }
+
+  // Refresh the filter after deleting an item
+  onDelete() {
+    this.filterMovies(this.movieFilterForm.value);
   }
 
   clearForm() {

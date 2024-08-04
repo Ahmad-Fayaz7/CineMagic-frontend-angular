@@ -16,9 +16,17 @@ export class HomeComponent {
 
   constructor(private movieService: MovieService) {}
   ngOnInit() {
+    this.loadMovies();
+  }
+
+  loadMovies() {
     this.movieService.getHomePageMovies().subscribe((movies) => {
       this.moviesInTheater = movies.inTheaters;
       this.upcomingMovies = movies.upcomingReleases;
     });
+  }
+
+  onDelete() {
+    this.loadMovies();
   }
 }

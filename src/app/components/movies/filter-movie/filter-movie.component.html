@@ -17,7 +17,7 @@
     <button mat-flat-button color="warn" (click)="clearForm()">Clear Form</button>
 
 </form>
-<app-movie-list [movies]="movies"></app-movie-list>
+<app-movie-list [movies]="movies" (onDelete)="onDelete()"></app-movie-list>
 
 <mat-paginator [length]="totalAmountOfRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="[5, 10, 15, 20]"
     (page)="paginatorUpdate($event)"></mat-paginator>

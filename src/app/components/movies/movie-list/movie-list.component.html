@@ -7,8 +7,8 @@
                     {{movie.title}}
                 </a>
             </p>
-            <a mat-flat-button color="primay" [routerLink]="'movies/edit/' + movie.id">Edit</a>
-            <button mat-flat-button color="warn">Delete</button>
+            <a mat-flat-button color="primay" [routerLink]="['/movies/edit', movie.id]">Edit</a>
+            <button mat-flat-button color="warn" (click)="showConfirmation(movie.id)">Delete</button>
         </div>
     </div>
 </app-generic-list>

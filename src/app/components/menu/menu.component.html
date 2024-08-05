@@ -7,16 +7,35 @@
     <div>
         <a mat-button [routerLink]="['movies/filter']"><mat-icon>search</mat-icon>Filter Movies</a>
     </div>
-    <div>
-        <a mat-button [routerLink]="['genres']">Genres</a>
-    </div>
-    <div>
-        <a mat-button [routerLink]="['actors']">Actors</a>
-    </div>
-    <div>
-        <a mat-button [routerLink]="['movietheaters']">Movie Teathers</a>
-    </div>
-    <div>
-        <a mat-button [routerLink]="['movies/create']">Create Movie</a>
-    </div>
+
+    <app-authorize-view [role]="'admin'">
+        <ng-container authorized>
+            <div>
+                <a mat-button [routerLink]="['genres']">Genres</a>
+            </div>
+            <div>
+                <a mat-button [routerLink]="['actors']">Actors</a>
+            </div>
+            <div>
+                <a mat-button [routerLink]="['movietheaters']">Movie Teathers</a>
+            </div>
+            <div>
+                <a mat-button [routerLink]="['movies/create']">Create Movie</a>
+            </div>
+        </ng-container>
+    </app-authorize-view>
+    <div class="space"></div>
+    <app-authorize-view>
+        <ng-container authorized>
+            <div>
+                <span>Hello, </span>
+                <a mat-button>Log Out</a>
+            </div>
+        </ng-container>
+        <ng-container notAuthorized>
+            <a mat-button [routerLink]="['login']">Log In</a>
+            <a mat-button [routerLink]="['register']">Register</a>
+        </ng-container>
+    </app-authorize-view>
+
 </mat-toolbar>

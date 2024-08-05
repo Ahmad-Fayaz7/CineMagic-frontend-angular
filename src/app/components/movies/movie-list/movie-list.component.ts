@@ -6,11 +6,18 @@ import { movieDto } from '../movie.model';
 import { RouterLink } from '@angular/router';
 import { MovieService } from '../movie.service';
 import { SweetAlertService } from '../../../utilities/sweet-alert/sweet-alret.service';
+import { AuthorizeViewComponent } from '../../security/authorize-view/authorize-view.component';
 
 @Component({
   selector: 'app-movie-list',
   standalone: true,
-  imports: [CommonModule, MaterialModule, GenericListComponent, RouterLink],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    GenericListComponent,
+    RouterLink,
+    AuthorizeViewComponent,
+  ],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.css',
 })

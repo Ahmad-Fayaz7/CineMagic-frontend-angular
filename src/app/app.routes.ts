@@ -14,6 +14,9 @@ import { EditActorComponent } from './components/actors/edit-actor/edit-actor.co
 import { EditGenreComponent } from './components/genres/edit-genre/edit-genre.component';
 import { EditMovieTheaterComponent } from './components/movie-theater/edit-movie-theater/edit-movie-theater.component';
 import { MovieDetailsComponent } from './components/movies/movie-details/movie-details.component';
+import { isAdminGuard } from './is-admin.guard';
+import { LoginComponent } from './components/security/login/login.component';
+import { RegisterComponent } from './components/security/register/register.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +39,7 @@ export const routes: Routes = [
   {
     path: 'movies/edit/:id',
     component: EditMovieComponent,
+    canActivate: [isAdminGuard],
   },
   {
     path: 'movies/filter',
@@ -48,39 +52,56 @@ export const routes: Routes = [
   {
     path: 'genres',
     component: IndexGenreComponent,
+    canActivate: [isAdminGuard],
   },
   {
     path: 'genres/create',
     component: CreateGenreComponent,
+    canActivate: [isAdminGuard],
   },
   {
     path: 'genres/edit/:id',
     component: EditGenreComponent,
+    canActivate: [isAdminGuard],
   },
   {
     path: 'actors',
     component: IndexActorComponent,
+    canActivate: [isAdminGuard],
   },
   {
     path: 'actors/create',
     component: CreateActorComponent,
+    canActivate: [isAdminGuard],
   },
   {
     path: 'actors/edit/:id',
     component: EditActorComponent,
+    canActivate: [isAdminGuard],
   },
 
   {
     path: 'movietheaters',
     component: IndexMovieTheaterComponent,
+    canActivate: [isAdminGuard],
   },
 
   {
     path: 'movietheaters/create',
     component: CreateMovieTheaterComponent,
+    canActivate: [isAdminGuard],
   },
   {
     path: 'movietheaters/edit/:id',
     component: EditMovieTheaterComponent,
+    canActivate: [isAdminGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
 ];

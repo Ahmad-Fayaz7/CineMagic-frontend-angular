@@ -1,0 +1,6 @@
+app-authorize-view {
+  display: flex;
+}
+.space {
+  flex: 1 1 auto;
+}

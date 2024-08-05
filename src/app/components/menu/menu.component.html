@@ -28,8 +28,8 @@
     <app-authorize-view>
         <ng-container authorized>
             <div>
-                <span>Hello, </span>
-                <a mat-button>Log Out</a>
+                <span>Hello, {{this.securityService.getFieldFromJWT('email')}}</span>
+                <a mat-button (click)="logout()">Log Out</a>
             </div>
         </ng-container>
         <ng-container notAuthorized>

@@ -1,1 +1,2 @@
-<app-authentication-form [action]="'Log In'"></app-authentication-form>
+<app-display-errors [erros]="errors"></app-display-errors>
+<app-authentication-form [action]="'Log In'" (onSubmit)="login($event)"></app-authentication-form>

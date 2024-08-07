@@ -8,6 +8,9 @@ import { MaterialModule } from '../../../material/material.module';
 import { CommonModule } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
 import { MapComponent } from '../../utils/map/map.component';
+import { RatingComponent } from '../../utils/rating/rating.component';
+import { RatingService } from '../../utils/rating.service';
+import { SweetAlertService } from '../../../utilities/sweet-alert/sweet-alret.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -18,6 +21,7 @@ import { MapComponent } from '../../utils/map/map.component';
     RouterLink,
     MarkdownComponent,
     MapComponent,
+    RatingComponent,
   ],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css',
@@ -26,7 +30,9 @@ export class MovieDetailsComponent {
   constructor(
     private movieService: MovieService,
     private activatedRoute: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private ratingService: RatingService,
+    private sweetAlert: SweetAlertService
   ) {}
 
   movie!: movieDto;
@@ -49,6 +55,12 @@ export class MovieDetailsComponent {
           };
         });
       });
+    });
+  }
+
+  onRating(rate: number) {
+    this.ratingService.rate(this.movie.id, rate).subscribe(() => {
+      this.sweetAlert.success('You have rated succuessfully this movie!');
     });
   }
 

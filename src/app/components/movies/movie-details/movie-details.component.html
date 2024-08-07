@@ -5,7 +5,8 @@
             <mat-chip [routerLink]="['/movies/moviefilter']" [queryParams]="{genreId: genre.id}"
                 *ngFor="let genre of movie.genres">{{genre.name}}</mat-chip>
         </mat-chip-set>
-        | {{releaseDate.toDateString()}} | Average: 0.0 | Your vote: 0.0
+        | {{releaseDate.toDateString()}} | Average: {{movie.averageRate}} | Your vote:<app-rating
+            (onRating)="onRating($event)" [selectedRate]="movie.userRate"></app-rating>
 
         <div style="display: flex;">
             <span style="display: inline-block; margin-right: 1em;">

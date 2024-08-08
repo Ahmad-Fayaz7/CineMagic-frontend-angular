@@ -17,6 +17,7 @@ import { MovieDetailsComponent } from './components/movies/movie-details/movie-d
 import { isAdminGuard } from './is-admin.guard';
 import { LoginComponent } from './components/security/login/login.component';
 import { RegisterComponent } from './components/security/register/register.component';
+import { UsersIndexComponent } from './components/security/users-index/users-index.component';
 
 export const routes: Routes = [
   {
@@ -103,5 +104,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'users',
+    component: UsersIndexComponent,
+    canActivate: [isAdminGuard],
   },
 ];

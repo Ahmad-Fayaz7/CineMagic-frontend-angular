@@ -47,11 +47,12 @@ export class MovieService {
 
   // Filter movies
   filter(values: any): Observable<any> {
+    //fromObject: This is an option in the HttpParams constructor that allows you to create HttpParams from an object, where each key-value pair in the object corresponds to a query parameter in the HTTP request.
     const params = new HttpParams({ fromObject: values });
     // observe: 'respnse' makes the httpClient to return full HttpResponse<T> object instead of just the response body of type T.
     return this.http.get<movieDto[]>(`${this.apiUrl}/filter`, {
       params,
-      observe: 'response', // becuase we the info in header for pagination
+      observe: 'response', // becuase we want the info sent by back-end in header for pagination
     });
   }
 
